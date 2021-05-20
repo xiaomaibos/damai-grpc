@@ -1,4 +1,4 @@
-FROM registry.cn-hangzhou.aliyuncs.com/micro-java/openjdk:8-jre-alpine
+FROM williamyeh/java8:latest
 MAINTAINER yangyuandong@tezign.com
 ENV TZ="Asia/Shanghai" HOME="/root" JVM_PARAMS=" " SPRING_PARAMS=" "
 WORKDIR ${HOME}
