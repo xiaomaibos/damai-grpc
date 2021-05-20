@@ -20,4 +20,10 @@ public class AdminControllerTest {
         ResultMap resMap = adminController.crawlProgramByCode("644431227376");
         System.out.println(JSON.toJSONString(resMap));
     }
+
+    @Test
+    public void testGetAddress() {
+        ResultMap result = adminController.getAddress(2);
+        System.out.println(result);
+    }
 }

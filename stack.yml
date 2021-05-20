@@ -12,8 +12,8 @@ services:
       networks:
         - idp_network
       ports:
-        - target: 8081
-          published: 8081
+        - target: 8091
+          published: 8091
           protocol: tcp
           mode: host
       deploy:

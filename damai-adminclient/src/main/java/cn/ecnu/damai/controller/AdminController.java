@@ -2,10 +2,7 @@ package cn.ecnu.damai.controller;
 
 import cn.ecnu.damai.controller.Response.ResultMap;
 import cn.ecnu.damai.controller.Response.ResultType;
-import cn.ecnu.damai.entity.City;
-import cn.ecnu.damai.entity.Level;
-import cn.ecnu.damai.entity.Program;
-import cn.ecnu.damai.entity.Show;
+import cn.ecnu.damai.entity.*;
 import cn.ecnu.damai.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +33,8 @@ public class AdminController {
     private DamaiCrawlService damaiCrawlService;
     @Resource
     private CityService cityService;
+    @Resource
+    private AddressService addressService;
 
     @RequestMapping("/addProgram")
     @ResponseBody
@@ -123,6 +122,21 @@ public class AdminController {
                 }
             }
             return new ResultMap(ResultType.SUCCESS, program);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultMap(ResultType.SEVER_ERROR);
+        }
+    }
+
+    @RequestMapping("/getAddress")
+    @ResponseBody
+    public ResultMap getAddress(Integer addressId) {
+        try {
+            Address address = addressService.getAddress(addressId);
+            if (address == null) {
+                return new ResultMap(ResultType.INVALID_PARAM);
+            }
+            return new ResultMap(ResultType.SUCCESS, address);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResultMap(ResultType.SEVER_ERROR);
