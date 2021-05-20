@@ -1,8 +1,11 @@
 server:
-  port: 80
+  port: 8090
   servlet:
     context-path: /damai-server
 spring:
+  grpc:
+    enable: true
+    port: 6565
   datasource:
     name: datasource
     type: com.alibaba.druid.pool.DruidDataSource
