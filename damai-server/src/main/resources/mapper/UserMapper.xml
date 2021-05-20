@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.ecnu.damai.dao.mapper.UserMapper">
+    <select id="findUserByUsernameAndPassword" resultType="integer" parameterType="cn.ecnu.damai.entity.User">
+        SELECT id
+        FROM user
+        WHERE username = #{username}
+          AND password = #{password}
+    </select>
+
+    <select id="findUserByUsername" resultType="cn.ecnu.damai.entity.User">
+        SELECT id AS uid,
+               username,
+               password,
+               nickname,
+               gender,
+               birthday,
+               identity,
+               image_url,
+               privilege
+        FROM user
+        WHERE username = #{username}
+    </select>
+
+    <insert id="addUser">
+        INSERT INTO user(username, password)
+        VALUES (#{username}, #{password})
+    </insert>
+
+    <select id="findUserByUserId" resultType="cn.ecnu.damai.entity.User">
+        SELECT id AS uid,
+               username,
+               password,
+               nickname,
+               gender,
+               birthday,
+               identity,
+               image_url,
+               privilege
+        FROM user
+        WHERE id = #{userId}
+    </select>
+
+    <update id="updateUser">
+        UPDATE user
+        SET nickname  = #{nickname},
+            password  = #{password},
+            identity  = #{identity},
+            birthday  = #{birthday},
+            gender    = #{gender},
+            image_url = #{headImg}
+        WHERE id = #{uid}
+    </update>
+
+    <resultMap id="ticketMap" type="cn.ecnu.damai.entity.Ticket">
+        <id property="ticketId" column="ticketId"/>
+        <result property="price" column="price"/>
+        <result property="seatInfo" column="seatInfo"/>
+        <result property="seatNum" column="seatNum"/>
+        <result property="valid" column="valid"/>
+        <result property="orderId" column="orderId"/>
+        <result property="levelId" column="levelId"/>
+        <association property="category" javaType="cn.ecnu.damai.entity.Category">
+            <id property="cid" column="categoryId"/>
+            <result property="name" column="name"/>
+            <result property="count" column="count"/>
+        </association>
+    </resultMap>
+    <select id="getTicketByUserId" resultMap="ticketMap">
+        SELECT ticket.id        AS ticketId,
+               ticket.price     AS price,
+               ticket.seat_num  AS seatNum,
+               ticket.seat_info AS seatInfo,
+               ticket.valid     AS valid,
+               ticket.order_id  AS orderId,
+               ticket.level_id  AS levelId,
+               category.id      AS categoryId,
+               category.name    AS name,
+               category.count   AS count
+        FROM ticket,
+             user,
+             `order`,
+             `show`,
+             program,
+             category
+        WHERE user.id = `order`.user_id
+          AND `order`.show_id = `show`.id
+          AND `show`.program_id = program.id
+          AND program.category_id = category.id
+          AND ticket.order_id = `order`.id
+          AND user.id = #{userId}
+    </select>
+</mapper>
