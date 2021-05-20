@@ -351,4 +351,19 @@ public class UserController {
     public Map<String, Object> getAmountOfCategoryByUserId(Integer userId) {
         return userService.getAmountOfCategoryByUserId(userId);
     }
+
+    @RequestMapping("/getAddress")
+    @ResponseBody
+    public ResultMap getAddress(Integer addressId) {
+        try {
+            Address address = addressService.getAddress(addressId);
+            if (address == null) {
+                return new ResultMap(ResultType.INVALID_PARAM);
+            }
+            return new ResultMap(ResultType.SUCCESS, address);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResultMap(ResultType.SEVER_ERROR);
+        }
+    }
 }

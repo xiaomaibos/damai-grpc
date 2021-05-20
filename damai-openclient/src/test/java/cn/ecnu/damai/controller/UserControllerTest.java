@@ -64,4 +64,10 @@ public class UserControllerTest {
         ResultMap result = userController.getOrderList(8);
         System.out.println(result);
     }
+
+    @Test
+    public void testGetAddress() {
+        ResultMap result = userController.getAddress(2);
+        System.out.println(result);
+    }
 }

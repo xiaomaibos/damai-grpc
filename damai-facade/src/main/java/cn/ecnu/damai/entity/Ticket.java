@@ -3,6 +3,7 @@ package cn.ecnu.damai.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * @author Kyrie Lee
@@ -11,7 +12,8 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "ticket")
-public class Ticket {
+public class Ticket implements Serializable {
+    private static final long serialVersionUID = 0L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

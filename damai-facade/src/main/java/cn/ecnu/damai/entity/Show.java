@@ -3,6 +3,7 @@ package cn.ecnu.damai.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
@@ -13,7 +14,8 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "`show`")
-public class Show {
+public class Show implements Serializable {
+    private static final long serialVersionUID = 0L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

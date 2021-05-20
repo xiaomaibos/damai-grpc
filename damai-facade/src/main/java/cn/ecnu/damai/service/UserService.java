@@ -1,6 +1,8 @@
 package cn.ecnu.damai.service;
 
 import cn.ecnu.damai.entity.User;
+import com.anoyi.grpc.annotation.GrpcService;
+import com.anoyi.grpc.constant.SerializeType;
 
 import java.util.Map;
 
@@ -8,6 +10,7 @@ import java.util.Map;
  * @author Kyrie Lee
  * @date 2021/5/11 10:43
  */
+@GrpcService(server = "flyme", serialization = SerializeType.PROTOSTUFF)
 public interface UserService {
     /**
      * 登录方法
