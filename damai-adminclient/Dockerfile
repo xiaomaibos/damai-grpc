@@ -1,5 +1,5 @@
 FROM williamyeh/java8:latest
-MAINTAINER yangyuandong@tezign.com
+MAINTAINER 597606065@qq.com
 ENV TZ="Asia/Shanghai" HOME="/root" JVM_PARAMS=" " SPRING_PARAMS=" "
 WORKDIR ${HOME}
 ADD target/*.jar ${HOME}/ROOT.jar
